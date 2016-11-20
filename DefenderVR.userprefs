@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj" RefactoringSettings.EnableRefactorings="True">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WeaponBehaviour.cs">
+    <Files>
+      <File FileName="Assets\Scripts\TurretBuilder.cs" Line="135" Column="22" />
+      <File FileName="Assets\Scripts\ButtonBehaviour.cs" Line="45" Column="2" />
+      <File FileName="Assets\Scripts\SteamVR_FirstPersonController.cs" Line="367" Column="5" />
+      <File FileName="Assets\Scripts\TurretBehaviour.cs" Line="109" Column="29" />
+      <File FileName="Assets\Scripts\DartGun.cs" Line="11" Column="27" />
+      <File FileName="Assets\Scripts\WeaponBehaviour.cs" Line="35" Column="2" />
+      <File FileName="Assets\Scripts\IHasTrajectory.cs" Line="12" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
