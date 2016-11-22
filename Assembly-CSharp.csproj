@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\SpawnEnemy.cs" />
      <Compile Include="Assets\Scripts\SteamVR_FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\StoneGun.cs" />
+     <Compile Include="Assets\Scripts\TrapBehaviour.cs" />
      <Compile Include="Assets\Scripts\TurretBehaviour.cs" />
      <Compile Include="Assets\Scripts\TurretBuilder.cs" />
      <Compile Include="Assets\Scripts\UINavigator.cs" />

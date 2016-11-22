@@ -10,6 +10,7 @@ public class TurretBehaviour : MonoBehaviour {
 	private GameObject currentTarget;
 	private LinkedList<GameObject> targetsInSight = new LinkedList<GameObject>();
 
+	private bool isActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +19,7 @@ public class TurretBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (currentTarget != null)
+		if (currentTarget != null && isActive)
 		{
 			aim();
 			fire();
@@ -27,6 +28,15 @@ public class TurretBehaviour : MonoBehaviour {
 		{
 			currentTarget = targetsInSight.Last.Value;
 		}
+	}
+
+	/// <summary>
+	/// Activates the turret
+	/// </summary>
+	/// <param name="active">If set to <c>true</c> active.</param>
+	public void setActive(bool active)
+	{
+		this.isActive = active;
 	}
 
 	/// <summary>

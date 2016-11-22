@@ -33,12 +33,12 @@ public class ButtonBehaviour : MonoBehaviour {
 	/// <param name="other">Object entering the trigger.</param>
 	void OnTriggerEnter(Collider other)
 	{
-		if (device == null && other.gameObject.GetComponentInParent<SteamVR_TrackedObject>() != null)
+		if (device == null && other.gameObject.tag == "Menu")
 		{
 			ExecuteEvents.Execute(gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerEnterHandler);
 
-			device = SteamVR_Controller.Input((int)other.gameObject.GetComponent<SteamVR_TrackedObject>().index);
-			controller = other.gameObject.GetComponent<SteamVR_FirstPersonController>();
+			device = SteamVR_Controller.Input((int)other.GetComponent<FixedJoint>().connectedBody.gameObject.GetComponentInParent<SteamVR_TrackedObject>().index);
+			controller = other.GetComponent<FixedJoint>().connectedBody.gameObject.GetComponentInParent<SteamVR_FirstPersonController>();
 			Debug.Log("Button entered");
 		}
 	}
@@ -50,7 +50,7 @@ public class ButtonBehaviour : MonoBehaviour {
 	/// <param name="other">Object exiting the trigger.</param>
 	void OnTriggerExit(Collider other)
 	{
-		if (device != null && other.gameObject.GetComponentInParent<SteamVR_TrackedObject>() != null)
+		if (device != null && other.gameObject.tag == "Menu")
 		{
 			ExecuteEvents.Execute(gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerExitHandler);
 
@@ -69,7 +69,7 @@ public class ButtonBehaviour : MonoBehaviour {
 		Debug.Log("Button pressed");
 		if(isSpawner)
 		{
-			SpawnObjectPrefab();
+			StartCoroutine("SpawnObjectPrefab");
 		}
 		else
 		{
@@ -80,11 +80,16 @@ public class ButtonBehaviour : MonoBehaviour {
 	/// <summary>
 	/// Spawns the defined prefab.
 	/// </summary>
-	void SpawnObjectPrefab()
+	IEnumerator SpawnObjectPrefab()
 	{
-		GameObject spawned = (GameObject)Instantiate(navigateTo,controller.transform);
-		controller.SnapCanGrabObjectToController(spawned);
-
+		yield return new WaitForSeconds(0.5f);
+		if (device.GetPress(SteamVR_Controller.ButtonMask.Trigger))
+		{
+			GameObject spawned = (GameObject)Instantiate(navigateTo);
+			controller.SnapCanGrabObjectToController(spawned);
+		}else{
+			Debug.Log("Press and hold to spawn");
+		}
 	}
 
 	/// <summary>

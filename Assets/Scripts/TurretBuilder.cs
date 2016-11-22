@@ -72,6 +72,7 @@ public class TurretBuilder : MonoBehaviour {
 		case Turretpart.MountToBase:
 		case Turretpart.MountToGun:
 			FindTurretBehaviour().AddGun(this.connectedPart.GetComponentInParent<Rigidbody>().gameObject);
+			FindTurretBehaviour().setActive(true);
 			break;
 		case Turretpart.Gun:
 			break;

@@ -61,6 +61,7 @@ public class SteamVR_FirstPersonController : MonoBehaviour
 	private Transform HeadsetCameraRig;
 	private float HeadsetCameraRigInitialYPosition;
 	private Vector3 TeleportLocation;
+	private Material[] oldMats;
 
 	//gets called once per frame
 	void Update()
@@ -76,6 +77,10 @@ public class SteamVR_FirstPersonController : MonoBehaviour
 		UpdateGrabbableObjects();
 	}
 
+	public void hideModel(bool hide)
+	{
+		SteamVR_Utils.Event.Send("hide_render_models", hide);
+	}
 
 	#region INIT 
 

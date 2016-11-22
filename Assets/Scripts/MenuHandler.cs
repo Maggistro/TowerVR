@@ -15,14 +15,24 @@ public class MenuHandler : MonoBehaviour {
 	[Tooltip("Object for navigating the menu")]
 	public GameObject navHelper;
 
+	[Tooltip("Second controller for navigation")]
+	public MenuHandler navController;
+
 	// Use this for initialization
 	void Start () {
 		device = SteamVR_Controller.Input((int)GetComponent<SteamVR_TrackedObject>().index);
-		book = (GameObject)Instantiate(book, transform.position, transform.rotation);
-		animControl = book.GetComponent<Animator>();
-		book.SetActive(false);
-		foreach (Canvas can in book.GetComponentsInChildren<Canvas>())
-		{
+		InitBook ();
+
+		navHelper = (GameObject)Instantiate(navHelper, navController.transform.position, navController.transform.rotation);
+		navHelper.SetActive(false);
+	}
+
+	void InitBook ()
+	{
+		book = (GameObject)Instantiate (book, transform.position, transform.rotation);
+		animControl = book.GetComponent<Animator> ();
+		book.SetActive (false);
+		foreach (Canvas can in book.GetComponentsInChildren<Canvas> ()) {
 			can.enabled = false;
 		}
 	}
@@ -32,7 +42,11 @@ public class MenuHandler : MonoBehaviour {
 		device = SteamVR_Controller.Input((int)GetComponent<SteamVR_TrackedObject>().index);
 		if(device.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
 		{
-			StartCoroutine(toggleMenu());
+			if(!navController.book.activeSelf)
+			{
+				StartCoroutine(toggleMenu());
+				StartCoroutine(toggleNavigation());
+			}
 		}
 	}
 
@@ -50,9 +64,11 @@ public class MenuHandler : MonoBehaviour {
 			yield return new WaitForSeconds(book.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length + 0.25f);
 			Destroy(book.GetComponent<FixedJoint>());
 			book.SetActive(false);
+			GetComponent<SteamVR_FirstPersonController>().hideModel(false);
 		}
 		else
 		{
+			GetComponent<SteamVR_FirstPersonController>().hideModel(true);
 			book.SetActive(true);
 			book.transform.position = transform.GetChild(0).Find("tip").GetChild(0).GetComponent<Rigidbody>().transform.position;
 			book.transform.rotation = transform.GetChild(0).Find("tip").GetChild(0).GetComponent<Rigidbody>().transform.rotation;
@@ -65,6 +81,27 @@ public class MenuHandler : MonoBehaviour {
 			yield return new WaitForSeconds(book.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length + 0.25f);
 			StartCoroutine("toggleCanvas", true);
 		}
+	}
+
+	IEnumerator toggleNavigation()
+	{
+		if(navHelper.activeSelf)
+		{
+			Destroy(navHelper.GetComponent<FixedJoint>());
+			navHelper.SetActive(false);
+			navController.GetComponent<SteamVR_FirstPersonController>().hideModel(false);
+		}
+		else
+		{
+			navController.GetComponent<SteamVR_FirstPersonController>().hideModel(true);
+			navHelper.SetActive(true);
+			navHelper.transform.position = navController.transform.GetChild(0).Find("tip").GetChild(0).transform.position;
+			navHelper.transform.rotation = navController.transform.GetChild(0).Find("tip").GetChild(0).transform.rotation;
+
+			navHelper.AddComponent<FixedJoint>();
+			navHelper.GetComponent<FixedJoint>().connectedBody =  navController.transform.GetChild(0).Find("tip").GetChild(0).GetComponent<Rigidbody>();
+		}
+		yield return null;
 	}
 
 	/// <summary>

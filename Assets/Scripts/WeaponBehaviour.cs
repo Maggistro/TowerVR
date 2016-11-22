@@ -33,7 +33,7 @@ public abstract class WeaponBehaviour : MonoBehaviour {
 		activeState = Weaponstates.IDLE;
 	}
 	
-	// Update is called once per frame
+	// Default update is called once per frame
 	protected void Update () {
 		if(ammunition == 0)
 		{
@@ -71,7 +71,6 @@ public abstract class WeaponBehaviour : MonoBehaviour {
 	/// </summary>
 	protected IEnumerator Reload()
 	{
-		Debug.Log("start reloading");
 		while(ammunition < magazineSize)
 		{
 			Debug.Log("reload shot");
@@ -90,7 +89,6 @@ public abstract class WeaponBehaviour : MonoBehaviour {
 	/// </summary>
 	protected IEnumerator Fire()
 	{
-		Debug.Log("try fire");
 		if(ammunition != 0)
 		{	
 			Debug.Log("fire");
