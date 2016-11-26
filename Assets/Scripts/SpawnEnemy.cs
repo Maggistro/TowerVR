@@ -13,14 +13,24 @@ public class SpawnEnemy : MonoBehaviour {
 	[Tooltip("Delay in beetween spawns")]
 	public float spawnDelay = 5.0f;
 
+	public bool autoStart = true;
+
 	// Use this for initialization
 	void Start () {
-		StartCoroutine("spawn");
+		if(autoStart)
+		{
+			StartCoroutine("spawn");
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void startSpawn()
+	{
+		StartCoroutine("spawn");
 	}
 
 	/// <summary>
