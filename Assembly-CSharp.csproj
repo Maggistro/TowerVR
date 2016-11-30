@@ -49,11 +49,14 @@
      <Compile Include="Assets\Scripts\ButtonBehaviour.cs" />
      <Compile Include="Assets\Scripts\DartGun.cs" />
      <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
-     <Compile Include="Assets\Scripts\GameControl.cs" />
+     <Compile Include="Assets\Scripts\Fader.cs" />
      <Compile Include="Assets\Scripts\IHasTrajectory.cs" />
+     <Compile Include="Assets\Scripts\LevelControl.cs" />
      <Compile Include="Assets\Scripts\MenuHandler.cs" />
+     <Compile Include="Assets\Scripts\SettingsBehaviour.cs" />
      <Compile Include="Assets\Scripts\ShowObjectInEditor.cs" />
      <Compile Include="Assets\Scripts\SpawnEnemy.cs" />
+     <Compile Include="Assets\Scripts\StartGame.cs" />
      <Compile Include="Assets\Scripts\SteamVR_FirstPersonController.cs" />
      <Compile Include="Assets\Scripts\StoneGun.cs" />
      <Compile Include="Assets\Scripts\TrapBehaviour.cs" />

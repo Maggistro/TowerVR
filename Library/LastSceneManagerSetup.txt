@@ -1,4 +1,7 @@
 sceneSetups:
 - path: Assets/Level1/Level1.unity
+  isLoaded: 0
+  isActive: 0
+- path: Assets/PreLevel/PreLevel.unity
   isLoaded: 1
   isActive: 1
